@@ -1,7 +1,7 @@
 +++
 title = 'Mon Premier Article'
 date = 2026-01-30T22:39:57+01:00
-draft = true
+draft = false
 +++
 
 ## Bienvenue sur mon nouveau site Hugo !
