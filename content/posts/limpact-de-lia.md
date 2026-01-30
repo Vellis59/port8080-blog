@@ -1,7 +1,7 @@
 +++
 title = 'Limpact De Lia'
 date = 2026-01-30T22:56:43+01:00
-draft = true
+draft = false
 +++
 
 ## L'IA : Simple Outil ou Nouvelle Révolution ?
