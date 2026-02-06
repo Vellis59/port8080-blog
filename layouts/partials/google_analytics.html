@@ -1,0 +1,13 @@
+{{/*
+  PaperMod calls partial "google_analytics.html".
+  Some theme versions may omit it, causing builds to fail.
+
+  Minimal, safe override:
+  - Never errors during build.
+  - If GA is not configured, it outputs nothing.
+
+  We avoid using deprecated/removed `.Site.GoogleAnalytics` accessors.
+*/}}
+{{- with site.Config.Services.GoogleAnalytics.ID -}}
+<!-- Google Analytics is configured ({{ . }}), but not injected by this theme override. -->
+{{- end -}}
