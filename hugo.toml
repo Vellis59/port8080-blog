@@ -2,3 +2,56 @@ baseURL = 'https://Vellis59.github.io/port8080-blog/'
 languageCode = 'fr-fr'
 title = 'port8080-blog'
 theme = 'PaperMod'
+
+defaultContentLanguage = 'fr'
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 12
+
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+
+[services.googleAnalytics]
+  ID = ''
+
+[params]
+  env = 'production'
+  description = 'Actu, guides et tests tech'
+
+  mainSections = ['actu','guides','tests','dossiers']
+
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  disableSpecial1stPost = true
+
+[menu]
+  [[menu.main]]
+    identifier = 'actu'
+    name = 'Actu'
+    url = '/actu/'
+    weight = 10
+  [[menu.main]]
+    identifier = 'guides'
+    name = 'Guides'
+    url = '/guides/'
+    weight = 20
+  [[menu.main]]
+    identifier = 'tests'
+    name = 'Tests'
+    url = '/tests/'
+    weight = 30
+  [[menu.main]]
+    identifier = 'dossiers'
+    name = 'Dossiers'
+    url = '/dossiers/'
+    weight = 40
+  [[menu.main]]
+    identifier = 'a-propos'
+    name = 'À propos'
+    url = '/a-propos/'
+    weight = 90
