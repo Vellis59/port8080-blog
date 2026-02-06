@@ -9,8 +9,6 @@ featured: true
 slug: "install-ollama-and-open-webui--compose"
 ---
 
-## Introduction
-
 Running large language models locally has become significantly easier thanks to modern tooling. By combining **Ollama** with **Open WebUI** and deploying them using **Docker Compose**, you can create a clean, reproducible, and user-friendly local AI environment in minutes.
 
 This guide walks through the complete process step by step, focusing on clarity and practical setup rather than theory.
