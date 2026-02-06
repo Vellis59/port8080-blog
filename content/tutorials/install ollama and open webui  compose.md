@@ -7,10 +7,9 @@ featured: true
 # Keep the current published URL stable.
 slug: "install-ollama-and-open-webui--compose"
 cover:
-  image: "/images/ollama-openwebui-cover.jpg"
+  image: "images/ollama-openwebui-cover.jpg"
   alt: "Ollama + Open WebUI (Docker Compose)"
   caption: "Local AI stack: Ollama + Open WebUI"
-  relative: false
 
 ---
 
