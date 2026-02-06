@@ -1,4 +1,13 @@
-# Install Ollama + Open WebUI (Docker Compose)
+---
+title: "Install Ollama + Open WebUI (Docker Compose)"
+date: 2026-02-06
+description: "A step-by-step Docker Compose setup for running Ollama with Open WebUI on your own machine."
+categories: ["Tutorials"]
+tags: ["ollama", "open-webui", "docker", "docker-compose", "self-hosting", "local-ai"]
+featured: true
+# Keep the current published URL stable.
+slug: "install-ollama-and-open-webui--compose"
+---
 
 ## Introduction
 
@@ -6,7 +15,9 @@ Running large language models locally has become significantly easier thanks to 
 
 This guide walks through the complete process step by step, focusing on clarity and practical setup rather than theory.
 
-### What Is Ollama?
+<!--more-->
+
+### What is Ollama?
 
 Ollama is a local model runtime that allows you to download, manage, and run large language models directly on your machine. It abstracts away much of the complexity involved in model execution and provides a simple API and CLI for interacting with models like LLaMA, Mistral, and others.
 
@@ -17,7 +28,7 @@ Key features of Ollama:
 - REST API for integration with other tools
 - Support for CPU and GPU workloads
 
-### What Is Open WebUI?
+### What is Open WebUI?
 
 Open WebUI is a web-based interface designed to interact with local or remote LLM backends. When paired with Ollama, it provides a clean chat-style UI, user management, conversation history, and model selection without requiring any coding.
 
