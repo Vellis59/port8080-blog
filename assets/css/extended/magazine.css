@@ -1,0 +1,41 @@
+/* PaperMod extension: magazine-style homepage grids */
+
+.magazine-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.magazine-grid > article {
+  grid-column: span 12;
+}
+
+@media (min-width: 768px) {
+  .magazine-grid > article {
+    grid-column: span 6;
+  }
+}
+
+@media (min-width: 1100px) {
+  .magazine-grid > article {
+    grid-column: span 4;
+  }
+
+  /* Make the first featured card larger on desktop */
+  .magazine-grid > article:first-child {
+    grid-column: span 8;
+  }
+}
+
+.magazine-section .page-header h2 {
+  margin: 0.2rem 0;
+}
+
+.magazine-sections {
+  margin-top: 1.25rem;
+}
+
+.magazine-section {
+  margin-bottom: 1.25rem;
+}

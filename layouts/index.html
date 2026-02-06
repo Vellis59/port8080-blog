@@ -1,0 +1,129 @@
+{{- define "main" -}}
+
+{{- $all := where site.RegularPages "Type" "in" site.Params.mainSections -}}
+{{- $all = where $all "Params.hiddenInHomeList" "!=" "true" -}}
+
+{{- $pinned := where $all "Params.pinned" true -}}
+{{- $featured := where $all "Params.featured" true -}}
+{{- $hero := union $pinned $featured | uniq -}}
+{{- $hero = sort $hero "Date" "desc" -}}
+{{- $hero = first 4 $hero -}}
+
+{{- if gt (len $hero) 0 -}}
+<header class="page-header">
+  <h1>À la une</h1>
+</header>
+
+<section class="magazine-grid">
+  {{- range $hero -}}
+  <article class="post-entry">
+    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false -}}
+    {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) -}}
+    <header class="entry-header">
+      <h2 class="entry-hint-parent">{{ .Title }}</h2>
+    </header>
+    {{- if (ne (.Param "hideSummary") true) -}}
+    <div class="entry-content">
+      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    </div>
+    {{- end -}}
+    {{- if not (.Param "hideMeta") -}}
+    <footer class="entry-footer">
+      {{- partial "post_meta.html" . -}}
+    </footer>
+    {{- end -}}
+    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+  </article>
+  {{- end -}}
+</section>
+{{- end -}}
+
+{{- /* Per-section blocks */ -}}
+{{- $sections := slice
+  (dict "key" "actu" "title" "Actu" "url" "/actu/")
+  (dict "key" "guides" "title" "Guides" "url" "/guides/")
+  (dict "key" "tests" "title" "Tests" "url" "/tests/")
+  (dict "key" "dossiers" "title" "Dossiers" "url" "/dossiers/")
+-}}
+
+<section class="magazine-sections">
+  {{- range $sections -}}
+    {{- $key := .key -}}
+    {{- $items := where $all "Section" $key | first 4 -}}
+    {{- if gt (len $items) 0 -}}
+    <div class="magazine-section">
+      <header class="page-header">
+        <h2><a href="{{ .url }}">{{ .title }}</a></h2>
+      </header>
+      <div class="magazine-grid">
+        {{- range $items -}}
+        <article class="post-entry">
+          {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false -}}
+          {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) -}}
+          <header class="entry-header">
+            <h2 class="entry-hint-parent">{{ .Title }}</h2>
+          </header>
+          {{- if (ne (.Param "hideSummary") true) -}}
+          <div class="entry-content">
+            <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+          </div>
+          {{- end -}}
+          {{- if not (.Param "hideMeta") -}}
+          <footer class="entry-footer">
+            {{- partial "post_meta.html" . -}}
+          </footer>
+          {{- end -}}
+          <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+        </article>
+        {{- end -}}
+      </div>
+    </div>
+    {{- end -}}
+  {{- end -}}
+</section>
+
+{{- /* Then a paginated “latest” feed (excluding hero posts) */ -}}
+{{- $rest := $all | complement $hero -}}
+{{- $paginator := .Paginate $rest -}}
+
+{{- if gt (len $paginator.Pages) 0 -}}
+<header class="page-header">
+  <h2>Derniers articles</h2>
+</header>
+
+{{- range $paginator.Pages -}}
+<article class="post-entry">
+  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false -}}
+  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) -}}
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">{{ .Title }}</h2>
+  </header>
+  {{- if (ne (.Param "hideSummary") true) -}}
+  <div class="entry-content">
+    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+  </div>
+  {{- end -}}
+  {{- if not (.Param "hideMeta") -}}
+  <footer class="entry-footer">
+    {{- partial "post_meta.html" . -}}
+  </footer>
+  {{- end -}}
+  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end -}}
+
+{{- if gt $paginator.TotalPages 1 -}}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev -}}
+    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">«&nbsp;{{ i18n "prev_page" }}</a>
+    {{- end -}}
+    {{- if $paginator.HasNext -}}
+    <a class="next" href="{{ $paginator.Next.URL | absURL }}">{{ i18n "next_page" }}&nbsp;»</a>
+    {{- end -}}
+  </nav>
+</footer>
+{{- end -}}
+{{- end -}}
+
+{{- end -}}
